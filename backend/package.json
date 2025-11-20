@@ -13,7 +13,8 @@
   "description": "",
   "type": "commonjs",
   "dependencies": {
-    "@azure/msal-node": "^3.8.2",
+    "@azure/msal-node": "^3.8.3",
+    "@microsoft/microsoft-graph-client": "^3.0.7",
     "axios": "^1.13.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
