@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { PublicClientApplication } from "@azure/msal-node";
 import { Client } from "@microsoft/microsoft-graph-client";
+import fs from "fs";
+import path from "path";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -68,7 +70,10 @@ app.get("/emails", async (req, res) => {
       .top(25) // in the future we'll delta query to get only new emails
       .get();
 
-    res.json(messages.value);
+    const filePath = path.join(__dirname, "..", "response.json");
+    fs.writeFileSync(filePath, JSON.stringify(messages.value, null, 2));
+
+    res.status(200).send("Emails retrieved and saved to response.json");
   } catch (error) {
     console.error(error);
     res.status(500).send("Failed to retrieve emails");
